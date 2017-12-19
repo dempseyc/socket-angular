@@ -11,9 +11,12 @@ const port = process.env.PORT || 8000;
 
 io.on('connection', (socket) => {
     console.log('user connected');
-    socket.on('new-message', (message) => {
-        io.emit(message);
-      });
+    socket.on('add-message', (message) => {
+        io.emit('message', {type:'new-message', text: message});    
+    });
+    socket.on('disconnect', () => {
+        console.log('user disconnected');
+    });
 });
 
 server.listen(port, () => {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy} from '@angular/core';
 import { SocketService } from '../services/socket.service';
 
 @Component({
@@ -7,10 +7,11 @@ import { SocketService } from '../services/socket.service';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy {
   title = 'VAMPIRE';
-  message: string;
-  messages: string[] = [];
+  message;
+  connection;
+  messages = [];
 
   constructor( private socketService: SocketService) {
   }
@@ -18,13 +19,16 @@ export class AppComponent {
   sendMessage() {
     this.socketService.sendMessage(this.message);
     this.message = '';  // just a reset?
-  };
+  }
 
   ngOnInit() {
-    this.socketService
-      .getMessages()
-      .subscribe((message: string) => {
-        this.messages.push(message);
-      });
-  };
+    this.connection = this.socketService.getMessages().subscribe(message => {
+      this.messages.push(message);
+    });
+  }
+
+  ngOnDestroy() {
+    this.connection.unsubscribe();
+  }
+
 }

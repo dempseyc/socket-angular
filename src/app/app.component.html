@@ -4,12 +4,12 @@
     Welcome to {{ title }}!
   </h1>
 
-  <div *ngFor="let message of messages">
-    {{message}}
-  </div>
+  <input [(ngModel)]="message" (keyup)="$event.keyCode == 13 && sendMessage()" />
+  <button (click)="sendMessage()">Send</button>
 
-<input [(ngModel)]="message" (keyup)="$event.keyCode == 13 && sendMessage()" />
-<button (click)="sendMessage()">Send</button>
+  <div *ngFor="let message of messages">
+    {{ message.text }}
+  </div>
 
 </div>
 
