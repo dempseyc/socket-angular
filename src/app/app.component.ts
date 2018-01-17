@@ -8,12 +8,18 @@ import { SocketService } from '../services/socket.service';
 })
 
 export class AppComponent implements OnInit, OnDestroy {
+
   title = 'VAMPIRE';
   message;
-  connection;
+  // connection just handles subscribe unsubscribe something
+  chatConnection;
+  //
+  timerConnection;
   messages = [];
-
-  constructor( private socketService: SocketService) {
+  timestamp;
+  
+  constructor( private socketService: SocketService ) {
+    
   }
 
   sendMessage() {
@@ -22,13 +28,17 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.connection = this.socketService.getMessages().subscribe(message => {
+    this.chatConnection = this.socketService.getMessages().subscribe(message => {
       this.messages.push(message);
+    });
+    this.timerConnection = this.socketService.startTimer().subscribe(time => {
+      this.timestamp = time;
     });
   }
 
   ngOnDestroy() {
-    this.connection.unsubscribe();
+    this.chatConnection.unsubscribe();
+    this.timerConnection.unsubscribe();
   }
 
 }
