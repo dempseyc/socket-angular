@@ -19,7 +19,7 @@ export class AppComponent implements OnInit, OnDestroy {
   timestamp;
   
   constructor( private socketService: SocketService ) {
-    
+    socketService.startTimer();
   }
 
   sendMessage() {
@@ -31,7 +31,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.chatConnection = this.socketService.getMessages().subscribe(message => {
       this.messages.push(message);
     });
-    this.timerConnection = this.socketService.startTimer().subscribe(time => {
+    this.timerConnection = this.socketService.getTime().subscribe(time => {
       this.timestamp = time;
     });
   }

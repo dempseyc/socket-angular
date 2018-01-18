@@ -27,6 +27,9 @@ export class SocketService {
 
   public startTimer() {
     this.socket.emit('start-timer');
+  }
+
+  public getTime() {
     let observable = new Observable(observer => {
       this.socket.on('new-time', (data) => {
         observer.next(data);
