@@ -13,6 +13,13 @@ export class SocketService {
     this.socket.emit('add-message', message);
   }
 
+  public sendName(name) {
+    this.socket.emit('add-name', name);
+  }
+  // public playerReady(client) {
+
+  // }
+
   public getMessages() {
     let observable = new Observable(observer => {
       this.socket.on('message', (data) => {
@@ -25,8 +32,20 @@ export class SocketService {
     return observable;
   }
 
-  public startTimer() {
-    this.socket.emit('start-timer');
+  // public startTimer() {
+  //   this.socket.emit('start-timer');
+  // }
+
+  public getPlayers() {
+    let observable = new Observable(observer => {
+      this.socket.on('name', (data) => {
+        observer.next(data);
+      });
+      return () => {
+        this.socket('disconnect');
+      };
+    });
+    return observable;
   }
 
   public getTime() {

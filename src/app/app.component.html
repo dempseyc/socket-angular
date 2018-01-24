@@ -7,8 +7,19 @@
   <input [(ngModel)]="message" (keyup)="$event.keyCode == 13 && sendMessage()" />
   <button (click)="sendMessage()">Send</button>
 
-  <div *ngFor="let message of messages">
-    {{ message.text }}
+  <div> Message List: 
+    <div *ngFor="let message of messages">
+      {{ message.text }}
+    </div>
+  </div>
+
+  <input [(ngModel)]="name" (keyup)="$event.keyCode == 13 && sendName()" />
+  <button (click)="sendName()">Enter Name</button>
+
+  <div> Player List: 
+    <div *ngFor="let player of playerList">
+      {{ player.text }}
+    </div>
   </div>
 
   <div>
