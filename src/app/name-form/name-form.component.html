@@ -1,0 +1,2 @@
+<input [(ngModel)]="name" (keyup)="$event.keyCode == 13 && sendName()" />
+<button (click)="sendName()">Enter Name</button>

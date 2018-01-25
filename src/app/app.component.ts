@@ -1,5 +1,9 @@
 import { Component, OnInit, OnDestroy} from '@angular/core';
 import { SocketService } from '../services/socket.service';
+import { NameFormComponent } from './name-form/name-form.component';
+import { PlayerListComponent } from './player-list/player-list.component';
+import { TextSpeakerComponent } from './text-speaker/text-speaker.component';
+import { TimerDisplayComponent } from './timer-display/timer-display.component';
 
 @Component({
   selector: 'app-root',
@@ -53,7 +57,7 @@ export class AppComponent implements OnInit, OnDestroy {
     });
     this.connection.players = this.socketService.getPlayers().subscribe(player => {
       this.playerList.push(player);
-    })
+    });
   }
 
   ngOnDestroy() {

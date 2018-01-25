@@ -13,19 +13,11 @@
     </div>
   </div>
 
-  <input [(ngModel)]="name" (keyup)="$event.keyCode == 13 && sendName()" />
-  <button (click)="sendName()">Enter Name</button>
-
-  <div> Player List: 
-    <div *ngFor="let player of playerList">
-      {{ player.text }}
-    </div>
-  </div>
-
-  <div>
-    This is the timer value: {{ timestamp.text }}
-  </div>
-
+  <app-name-form></app-name-form>
+  <app-player-list></app-player-list>
+  <app-timer-display></app-timer-display>
+  <app-text-speaker></app-text-speaker>
+  
 </div>
 
 
